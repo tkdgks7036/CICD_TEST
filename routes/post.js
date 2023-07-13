@@ -137,7 +137,7 @@ router.delete('/:postId', authMiddleware, async (req, res) => {
             return;
         };
 
-        // 수정이 필요한 게시글 ( = delete_target ) 을 작성한 nickname 과
+        // 삭제가 필요한 게시글 ( = delete_target ) 을 작성한 nickname 과
         // req.body 에서 입력한 nickname 이 일치하는지 확인 후 수정 권한 체크
         const delete_target = await Posts.findOne({ where: { postId: postId } })
         if (userId !== delete_target.userId) {
