@@ -114,8 +114,6 @@ router.put('/:postId', authMiddleware, async (req, res) => {
             { where: { [Op.and]: [{ postId: postId }, { userId: userId }] } }
         );
 
-        console.log(update_done);
-
         if (update_done != 1) {
             res.status(401).json({ errorMessage: '게시글이 정상적으로 수정되지 않았습니다.' });
             return;
@@ -153,7 +151,7 @@ router.delete('/:postId', authMiddleware, async (req, res) => {
             { where: { [Op.and]: [{ postId: postId }, { userId: userId }] } }
         );
 
-        if (delete_done.modifiedCount === 0) {
+        if (delete_done !== 1) {
             res.status(401).json({ errorMessage: '게시글이 정상적으로 삭제되지 않았습니다.' });
             return;
         };
