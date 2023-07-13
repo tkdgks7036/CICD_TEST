@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 
 const { Users } = require('../models');
-const { Posts } = require('../models');
 
 // 회원가입 API
 router.post('/', async (req, res) => {
