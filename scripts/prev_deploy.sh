@@ -2,4 +2,4 @@
 Repo=/home/ubuntu
 cd $Repo
 
-sudo pm2 delete all
+pm2 delete all
