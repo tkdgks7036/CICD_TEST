@@ -43,7 +43,7 @@ jobs:
         run: aws s3 cp --region ap-northeast-2 ./all_list.zip s3://cicd-s3-lunabucket/deploy/
 
       - name: deploy with AWS CodeDeploy # AWS CodeDeploy 사용하여 배포
-        run: aws deploy create-deplopyment
+        run: aws deploy create-deployment
           --application-name CICD-CodeDeploy-app
           --deployment-config-name CodeDeployDefault.OneAtATime
           --deployment-group-name CICD-CodeDeploy-group
