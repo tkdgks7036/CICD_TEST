@@ -35,7 +35,7 @@ jobs:
       - name: AWS configure credentials # AWS 자격증명
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }} # Github Actions IAM 사용자 ~ Github Repo Secrets
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }} # Github Actions IAM 사용자 ~ Github Repo Secrets
           aws-secret-access-key-id: ${{ secrets.AWS_SECRET_ACCESS_KEY }} # Github Actions IAM 사용자 ~ Github Repo Secrets
           aws-region: ap-northeast-2 # 현재 지역
 
