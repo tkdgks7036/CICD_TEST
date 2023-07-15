@@ -4,4 +4,3 @@ $Repo
 
 sudo npm ci
 npm start
-pm2 restart app.js
