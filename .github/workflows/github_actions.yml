@@ -20,7 +20,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3 # 실행 환경을 자동으로 설정하는 Github 에서 제공하는 scripts
 
-      - name: Use Node.js ${{ matrix.node-version }} # 18.x
+      - name: Use Node.js ${{ matrix.node-version }} # Node.js 18.x 버전 사용
         uses: actions/setup-node@v3 # 어떤 환경에서든 Node 를 설정
         with:
           node-version: ${{ matrix.node-version }} # 18.x
