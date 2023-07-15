@@ -45,7 +45,7 @@ jobs:
       - name: deploy with AWS CodeDeploy # AWS CodeDeploy 사용하여 배포
         run: aws deploy create-deplopyment
           --application-name CICD-CodeDeploy-app
-          --deployment-config-name CodeDeployDefault.AllAtOnce
+          --deployment-config-name CodeDeployDefault.OneAtATime
           --deployment-group-name CICD-CodeDeploy-group
           --s3-location bucket=cicd-s3-lunabucket,bundleType=zip,key=deploy/all_list.zip
 
