@@ -1,0 +1,57 @@
+name: Node.js CI
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04 # AMI 이름에 ubuntu 버전 확인 가능
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+      - uses: actions/checkout@v3 # 실행 환경을 자동으로 설정하는 Github 에서 제공하는 scripts
+
+      - name: Use Node.js ${{ matrix.node-version }} # 18.x
+        uses: actions/setup-node@v3 # 어떤 환경에서든 Node 를 설정
+        with:
+          node-version: ${{ matrix.node-version }} # 18.x
+          cache: "npm"
+
+      - name: build server files # 서버 구축
+        run: npm ci
+
+      - name: zip files # 파일 압축
+        run: zip -r all_list.zip ./app.js ./appspec.yml ./package.json ./package-lock.json
+          --./scripts ./routes ./models ./migrations ./middlewares ./config
+
+      - name: AWS configure credentials # AWS 자격증명
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }} # Github Actions IAM 사용자 ~ Github Repo Secrets
+          aws-secret-access-key-id: ${{ secrets.AWS_SECRET_ACCESS_KEY }} # Github Actions IAM 사용자 ~ Github Repo Secrets
+          aws-region: ap-northeast-2 # 현재 지역
+
+      - name: upload to S3 # 압축한 파일 S3 에 upload
+        run: aws s3 cp --region ap-northeast-2 ./all_list.zip s3://cicd-s3-lunabucket/deploy/
+
+      - name: deploy with AWS CodeDeploy # AWS CodeDeploy 사용하여 배포
+        run: aws deploy create-deplopyment
+          --application-name CICD-CodeDeploy-app
+          --deployment-config-name CodeDeployDefault.AllAtOnce
+          --deployment-group-name CICD-CodeDeploy-group
+          --s3-location bucket=cicd-s3-lunabucket,bundleType=zip,key=deploy/all_list.zip
+
+          # run 에 대한 내용
+          # application-name 설정 ( = CodeDeploy 애플리케이션명 )
+          # deployment-config-name 설정 ( = CodeDeploy 배포구성 )
+          # deployment-group-name 설정 ( = CodeDeploy 그룹명 )
+          # s3 설정 ( bucket: 이름, bundleType: 핸들링할 파일의 확장자, key: 어디에?)

@@ -1,0 +1,31 @@
+version: 0.0
+os: linux
+
+# 파일 복사 및 경로 지정
+files:
+  - source: / # instance 에 복사할 디렉토리 경로
+    destination: /home/ubuntu/CICD_TEST # instance 에서 파일이 복사되는 위치
+    overwrite: yes # destination 에 이미 동일한 파일이 있는 경우 덮어쓰기
+
+# CodeDeploy 가 배포 대상 위치에 이미 존재하지만 ?
+# 이전에 성공한 배포의 일부가 아닌 파일을 처리하는 방식을 지정한다.
+# [ Option List ]
+# DISALLOW : 배포가 실패함. 옵션을 지정하지 않은 경우 default
+# OVERWRITE : 현재 배포 중인 애플리케이션 수정파일의 버전이 instance 에 이미 있는 버전을 대체
+# RETATEW : instance 에 이미 있는 파일의 버전이 유지되고, 새 배포의 일부로 사용됨
+file_exists_behavior: OVERWRITE
+
+# files 에서 복사한 파일에 대한 권한 설정
+permissions:
+  - object: /home/ubuntu # 권한을 지정할 파일 또는 디렉토리
+    pattern: '**' # 똑같은 패턴에만 권한 부여
+    owner: ubuntu # object 의 소유자
+    group: ubuntu # object 의 그룹 이름
+
+hooks:
+  Prev_deploy
+    - location: scripts/prev_deploy.sh
+      runas: ubuntu
+  After_deploy
+    - location: scripts/after_deploy.sh
+      runas: ubuntu
