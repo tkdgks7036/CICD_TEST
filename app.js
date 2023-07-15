@@ -15,7 +15,7 @@ app.use(cookieParser());
 app.use('/', mainRouter);
 
 app.get('/', (req, res) => {
-    res.send('CICD 테스트 메인페이지입니다.');
+    res.send('CICD 테스트 메인페이지입니다.(230716 06:48 기준)');
 });
 
 
