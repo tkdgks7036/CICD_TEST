@@ -14,6 +14,10 @@ app.use(cookieParser());
 
 app.use('/', mainRouter);
 
+app.get('/', (req, res) => {
+    res.send('CICD 테스트 메인페이지입니다.');
+});
+
 
 app.listen(port, () => {
     console.log('Node.js 주특기 Lv.3 과제가 오픈되었습니다.');
