@@ -53,4 +53,4 @@ jobs:
           # application-name 설정 ( = CodeDeploy 애플리케이션명 )
           # deployment-config-name 설정 ( = CodeDeploy 배포구성 )
           # deployment-group-name 설정 ( = CodeDeploy 그룹명 )
-          # s3 설정 ( bucket: 이름, bundleType: 핸들링할 파일의 확장자, key: 어디에?)
+          # s3 설정 ( bucket: 이름, bundleType: 핸들링할 파일의 확장자, key: 대상)
