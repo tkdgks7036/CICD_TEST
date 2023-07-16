@@ -1,6 +1,6 @@
 #!/bin/sh
 Repo=/home/ubuntu/CICD_TEST
-$Repo
+cd $Repo
 
 sudo npm ci
 npm start
