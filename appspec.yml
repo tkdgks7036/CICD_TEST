@@ -29,4 +29,4 @@ hooks:
       
   AfterInstall:
     - location: scripts/after_deploy.sh
-      runas: ubuntu
+      # runas: ubuntu
