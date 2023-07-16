@@ -30,7 +30,7 @@ jobs:
         run: npm ci
 
       - name: zip files # 파일 압축
-        run: zip -r all_list.zip ./app.js ./appspec.yml ./package.json ./package-lock.json ./scripts ./routes ./models ./migrations ./middlewares ./config
+        run: zip -r all_list.zip ./app.js ./appspec.yml ./scripts ./routes ./models ./migrations ./middlewares ./config ./package.json ./package-lock.json
 
       - name: AWS configure credentials # AWS 자격증명
         uses: aws-actions/configure-aws-credentials@v1
