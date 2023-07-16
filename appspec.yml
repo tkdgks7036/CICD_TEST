@@ -23,10 +23,10 @@ permissions:
     group: ubuntu # object 의 그룹 이름
 
 hooks:
-  Prev_deploy:
+  BeforeInstall:
     - location: scripts/prev_deploy.sh
       runas: ubuntu
       
-  After_deploy:
+  AfterInstall:
     - location: scripts/after_deploy.sh
       runas: ubuntu
