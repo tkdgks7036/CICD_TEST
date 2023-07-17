@@ -15,7 +15,7 @@ app.use(cookieParser());
 app.use('/', mainRouter);
 
 app.get('/', (req, res) => {
-    res.send('CICD 테스트 성공(230716 19:05)');
+    res.send('CICD 테스트 성공(230718 04:49)');
 });
 
 
